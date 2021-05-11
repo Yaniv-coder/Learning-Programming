@@ -91,8 +91,6 @@ public static int forceLengthOfLongestSubstring(final String s) {
 
 原文地址：[Teach Yourself Programming in Ten Years (norvig.com)](http://norvig.com/21-days.html)
 
-[《Teach Yourself Programming in Ten Years》](https://github.com/Yaniv-coder/Learning-Programming/blob/main/EnglishArticles/《Teach Yourself Programming in Ten Years》.md)
-
 这篇文章主要阐述了一个观点：要想学好学精一种技术，需要有十年磨一剑的决心。
 
 当今社会充斥着各种各样的速成书及培训，这种俗称只能让你学一个皮毛，可能连入门都算不上。
