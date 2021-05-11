@@ -10,12 +10,14 @@ package com.yan.study.leetcode.medium;
  */
 public class TestExercises {
     public static void main(String[] args) {
-        System.out.println(lengthOfLongestSubstring(" "));
+        System.out.println("lengthOfLongestSubstring: " + lengthOfLongestSubstring("abcbcvfbs"));
+        System.out.println("forceLengthOfLongestSubstring: " + forceLengthOfLongestSubstring("abcbcvfbs"));
     }
 
     /**
-     * 求解无重复字符的最长字串.
+     * 最优解 3.无重复字符的最长子串.
      * @param s 给定字符串
+     * @return 最长子串长度
      */
     public static int lengthOfLongestSubstring(final String s) {
         // 遍历过的字符存放在该数组中
@@ -35,5 +37,44 @@ public class TestExercises {
         }
 
         return result;
+    }
+
+    /**
+     * 暴力求解（代码复杂，且耗时长） 3.无重复字符的最长字串.
+     * @param s 给定字符串
+     * @return 最长子串长度
+     */
+    public static int forceLengthOfLongestSubstring(final String s) {
+        int maxSubLength = 0;
+        int curSubLength = 0;
+        char[] lastChar = new char[s.length()];
+        final char[] chars = s.toCharArray();
+        int k = 1;
+        for (int i = 0; i < chars.length; i++) {
+            char curChar = chars[i];
+            // 与该轮历史遍历过的字符中查找有无重复
+            for (int j = 0; j < curSubLength; j++) {
+                // 如果存在重复字符，则与目前最大子串长度比较
+                if (curChar == lastChar[j]) {
+                    if (maxSubLength < curSubLength) {
+                        maxSubLength = curSubLength;
+                    }
+                    curSubLength = 0;
+                    // 如果遍历到中间的子串出现重复字符，则回到该子串首字符的下一个字符继续遍历
+                    i = k;
+                    ++k;
+                    curChar = chars[i];
+                    break;
+                }
+            }
+            // 将遍历过的字符存入历史数组中
+            lastChar[curSubLength] = curChar;
+            ++curSubLength;
+        }
+        if (maxSubLength < curSubLength) {
+            maxSubLength = curSubLength;
+        }
+
+        return maxSubLength;
     }
 }
