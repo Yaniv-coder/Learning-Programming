@@ -1,5 +1,10 @@
 package com.yan.study.leetcode.medium;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 /**
  * LeetCode练习题.
  *
@@ -8,10 +13,11 @@ package com.yan.study.leetcode.medium;
  * @version: 1.0
  * @since: JDK 11.0.9
  */
-public class TestExercises {
+public class TestArrayExercises {
     public static void main(String[] args) {
-        System.out.println("lengthOfLongestSubstring: " + lengthOfLongestSubstring("abcbcvfbs"));
-        System.out.println("forceLengthOfLongestSubstring: " + forceLengthOfLongestSubstring("abcbcvfbs"));
+//        System.out.println("lengthOfLongestSubstring: " + lengthOfLongestSubstring("abcbcvfbs"));
+//        System.out.println("forceLengthOfLongestSubstring: " + forceLengthOfLongestSubstring("abcbcvfbs"));
+        System.out.println("removeDuplicates: " + removeDuplicates(new int[] {0,0,1,1,1,2,2,3,3,4}));
     }
 
     /**
@@ -76,5 +82,37 @@ public class TestExercises {
         }
 
         return maxSubLength;
+    }
+
+    /**
+     * 删除排序数组中的重复项.
+     *
+     * 题目：给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，返回删除后数组的新长度。
+     * 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+     *
+     * 作者：力扣 (LeetCode)
+     * 链接：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2gy9m/
+     * 来源：力扣（LeetCode）
+     * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+     *
+     * @param nums 一个有序数组 nums
+     * @return 删除重复元素后数组的新长度
+     */
+    public static int removeDuplicates(int[] nums) {
+        // 用来判断元素是否已经出现过
+        final Set<Integer> lastIntSet = new TreeSet<>();
+        // 存放第一次出现的元素的下标
+        final List<Integer> removeArrIndexList = new ArrayList<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            final int num = nums[i];
+            lastIntSet.add(num);
+        }
+        final Object[] array = (Object[]) lastIntSet.toArray();
+        for (int i = 0; i < array.length; i++) {
+            nums[i] = (int) array[i];
+        }
+
+        return array.length;
     }
 }
