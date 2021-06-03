@@ -11,8 +11,6 @@
 
 [26. 删除有序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
 
-
-
 优化版本，即双指针法：
 
 ```java
@@ -54,12 +52,13 @@ public static int removeDuplicates(int[] nums) {
 
 ## Review
 
-原文地址：[]()
+原文地址：[Why low code software development is eating the world](https://blog.devgenius.io/why-low-code-software-development-is-eating-the-world-ca5d9644a821)
+该文章主要讲了目前流行的少量代码开发网站的各方面，且越来越多的网站利用了`low-code`来开发。
 
 
 
 ## Tip
-
+编码习惯问题：原来处理空值的时候直接返回一个`null`或者抛异常；直到我看了一篇代码优化的文章，才发现有更好的写法，就是直接返回一个空对象，如果是集合就返回一个空集合。这样不用在代码中写很多`if else`去判断空值问题了，代码就会变得更加简洁。
 
 
 
