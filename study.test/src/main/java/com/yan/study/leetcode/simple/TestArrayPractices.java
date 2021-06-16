@@ -11,7 +11,7 @@ import java.util.TreeSet;
  * @version: 1.0
  * @since: JDK 11.0.9
  */
-public class TestArrayExercises {
+public class TestArrayPractices {
     public static void main(String[] args) {
         System.out.println("removeDuplicates: " + removeDuplicates(new int[] {0,0,1,1,1,2,2,3,3,4}));
         System.out.println("optimizationRemoveDuplicates: " + optimizationRemoveDuplicates(new int[] {0,0,1,1,1,2,2,3,3,4}));
