@@ -1,10 +1,12 @@
 package com.yan.study.leetcode.medium;
 
+import com.yan.study.utils.CommonUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * LeetCode练习题——中等.
+ * LeetCode数组练习题——中等.
  *
  * @author: YanJiaqi
  * @date: 2021/5/11 0011 20:44
@@ -21,24 +23,7 @@ public class TestArrayPractises {
 //        rotateUseCycleWithLowPerformance(nums, 2);
 //        rotateUseCycle(nums, 10);
         rotate(nums, 10);
-        printIntArray(nums);
-    }
-
-    /**
-     * 打印数组.
-     *
-     * @param array 数组
-     */
-    public static void printIntArray(final int[] array) {
-        String str = "[";
-        for (int i = 0; i < array.length; i++) {
-            if (i == (array.length - 1)) {
-                str += array[i] + "]\n";
-            } else {
-                str += array[i] + ", ";
-            }
-        }
-        System.out.println(str);
+        CommonUtils.printIntArray(nums);
     }
 
     /**

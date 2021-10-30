@@ -31,4 +31,39 @@ public final class CommonUtils {
         }
         System.out.println(str);
     }
+
+
+    /**
+     * 打印数组.
+     *
+     * @param array 数组
+     */
+    public static void printCharArray(final char[] array) {
+        String str = "[";
+        for (int i = 0; i < array.length; i++) {
+            if (i == (array.length - 1)) {
+                str += array[i] + "]\n";
+            } else {
+                str += array[i] + ", ";
+            }
+        }
+        System.out.println(str);
+    }
+
+    /**
+     * 打印矩阵.
+     * @param matrix 矩阵
+     */
+    public static void printMatrix(final int[][] matrix) {
+        String str = "[\n";
+        for (int i = 0; i < matrix.length; i++) {
+            str += "[";
+            for (int j = 0; j < matrix[i].length; j++) {
+                str += matrix[i][j] + ", ";
+            }
+            str += "]\n";
+        }
+        str += "]";
+        System.out.println(str);
+    }
 }

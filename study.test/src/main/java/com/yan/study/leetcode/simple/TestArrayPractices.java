@@ -5,7 +5,7 @@ import com.yan.study.utils.CommonUtils;
 import java.util.*;
 
 /**
- * LeetCode练习题——简单.
+ * LeetCode数组练习题——简单.
  *
  * @author: YanJiaqi
  * @date: 2021/5/11 0011 20:44
@@ -21,10 +21,14 @@ public class TestArrayPractices {
         CommonUtils.printIntArray(intersectResult1);
         final int[] intersectResult2 = intersectWithHashMap(new int[]{0, 1, 1, 2, 5, 6, 6}, new int[]{0, 0, 1, 2, 2, 5, 6, 6, 6});
         CommonUtils.printIntArray(intersectResult2);
-        final int[] indicesWithViolent = twoSumWithViolent(new int[] {2,7,11,15}, 9);
+        final int[] indicesWithViolent = twoSumWithViolent(new int[]{2, 7, 11, 15}, 9);
         CommonUtils.printIntArray(indicesWithViolent);
-        final int[] indices = twoSum(new int[] {2,7,11,15}, 9);
+        final int[] indices = twoSum(new int[]{2, 7, 11, 15}, 9);
         CommonUtils.printIntArray(indices);
+        final int[][] matrix = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        CommonUtils.printMatrix(matrix);
+        rotate(matrix);
+        CommonUtils.printMatrix(matrix);
     }
 
     /**
@@ -185,7 +189,8 @@ public class TestArrayPractices {
      * @param arrLength       结果数组长度
      * @return 结果数组
      */
-    private static int[] generateResult(final Map<Integer, Integer> num2CntMapOuter, final Map<Integer, Integer> num2CntMapInner, final int arrLength) {
+    private static int[] generateResult(final Map<Integer, Integer> num2CntMapOuter,
+                                        final Map<Integer, Integer> num2CntMapInner, final int arrLength) {
         int[] resultArr = new int[0];
         for (Map.Entry<Integer, Integer> entry : num2CntMapOuter.entrySet()) {
             final Integer num = entry.getKey();
@@ -276,7 +281,7 @@ public class TestArrayPractices {
      * Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
      * You may assume that each input would have exactly one solution, and you may not use the same element twice.
      * You can return the answer in any order.
-     *
+     * <p>
      * 作者：力扣 (LeetCode)
      * 链接：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2jrse/
      * 来源：力扣（LeetCode）
@@ -310,7 +315,7 @@ public class TestArrayPractices {
      * Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
      * You may assume that each input would have exactly one solution, and you may not use the same element twice.
      * You can return the answer in any order.
-     *
+     * <p>
      * 作者：力扣 (LeetCode)
      * 链接：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2jrse/
      * 来源：力扣（LeetCode）
@@ -324,11 +329,53 @@ public class TestArrayPractices {
         final Map<Integer, Integer> result2IndexMap = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             if (result2IndexMap.containsKey(nums[i])) {
-                return new int[] {result2IndexMap.get(nums[i]), i};
+                return new int[]{result2IndexMap.get(nums[i]), i};
             }
             result2IndexMap.put(target - nums[i], i);
         }
 
         return new int[0];
+    }
+
+    /**
+     * 48. Rotate Image旋转图像（两次翻转法）.
+     * You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise).
+     * You have to rotate the image in-place, which means you have to modify the input 2D matrix directly. DO NOT allocate another 2D matrix and do the rotation.
+     * <p>
+     * 作者：力扣 (LeetCode)
+     * 链接：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/xnhhkv/
+     * 来源：力扣（LeetCode）
+     * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+     * <p>
+     * 思路（通过一次基于中线的上下交换和一次基于对角线的交换即可实现旋转图像）：
+     * 1.先进行基于中线的上下交换：通过双指针实现，一个指针从第一行开始遍历，另一个指针则从最后一行开始遍历，
+     * 并交换两个指针所在行的内容，直到它们指向了同一行或者超越了中线才停止；
+     * 2.再进行基于对角线的交换：遍历每一行对角线上的元素后面的那些元素，
+     * 设所遍历的元素坐标为（x,y），则我们就要将其与坐标为（y,x）的元素进行交换。直到到达最后一行就停止。
+     * 3.完成上面两个步骤后就得到了最终的结果。
+     *
+     * @param matrix n x n的矩阵
+     */
+    public static void rotate(final int[][] matrix) {
+        int reversePointer = matrix.length - 1;
+        int[] temp = null;
+        // 1.先进行基于中线的上下交换：通过双指针实现，一个指针从第一行开始遍历，另一个指针则从最后一行开始遍历，
+        //   并交换两个指针所在行的内容，直到它们指向了同一行或者超越了中线才停止；
+        for (int startPointer = 0; startPointer < reversePointer; startPointer++) {
+            temp = matrix[startPointer];
+            matrix[startPointer] = matrix[reversePointer];
+            matrix[reversePointer] = temp;
+            reversePointer--;
+        }
+
+        // 2.再进行基于对角线的交换：遍历每一行对角线上的元素后面的那些元素，
+        //   设所遍历的元素坐标为（x,y），则我们就要将其与坐标为（y,x）的元素进行交换。直到到达最后一行就停止。
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = i + 1; j < matrix.length; j++) {
+                matrix[i][j] = matrix[i][j] ^ matrix[j][i];
+                matrix[j][i] = matrix[i][j] ^ matrix[j][i];
+                matrix[i][j] = matrix[i][j] ^ matrix[j][i];
+            }
+        }
     }
 }
